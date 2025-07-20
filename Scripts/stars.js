@@ -28,7 +28,7 @@ for (let l = 0; l < depthLayers; l++) {
 }
 
 // Réagir au curseur
-canvas.addEventListener("mousemove", e => {
+document.body.addEventListener("mousemove", e => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
 });
