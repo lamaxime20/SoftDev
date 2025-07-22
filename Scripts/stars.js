@@ -1,4 +1,5 @@
-const canvas = document.getElementById("stars");
+(() => {
+  const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
 let width = canvas.width = window.innerWidth;
@@ -80,3 +81,4 @@ window.addEventListener("resize", () => {
 });
 
 animate();
+})();

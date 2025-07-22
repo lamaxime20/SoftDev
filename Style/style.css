@@ -7,18 +7,47 @@ html, body {
 }
 
 #stars {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 0;
     width: 100%;
     height: 100%;
+    display: block;
     background: #034971;
 }
 
+#cube {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* Pour que le contenu passe au-dessus sans bloquer */
+}
+
 .acceuil {
+    width: 100%;
+    height: 100vh; /* 100% de la hauteur de l'écran */
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.section2 {
+    width: 100%;
+    position: relative;
+    display: none;
+    background: #03712d;
+}
+
+.container, .content {
     position: relative;
     z-index: 1;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: auto;
+    color: white;
 }
 
 .vbox {
@@ -85,3 +114,52 @@ html, body {
         box-shadow: 0 0 25px #00ff88;
     }
 }
+
+/* Titres */
+h2 {
+  color: #00ccff;
+  border-bottom: 2px solid #00ccff;
+  padding-bottom: 0.3rem;
+  margin-top: 2rem;
+}
+
+/* Cartes de services */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  border: 1px solid #00ccff33;
+}
+
+/* Listes et paragraphes */
+ul {
+  padding-left: 1.2rem;
+  list-style: square;
+}
+
+ol {
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Optionnel : couleur différente pour chaque section */
+.canvas-section:nth-child(1) {
+  background-color: #034971;
+}
+
+.canvas-section:nth-child(2) {
+  background-color: #021f33;
+}
+
