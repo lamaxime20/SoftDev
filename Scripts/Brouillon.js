@@ -44,3 +44,117 @@ function createLightning(pos1, pos2) {
         scene.remove(flash);
     }, 300); // éclair plus long
 }
+
+
+
+// 1. Vérifie si on est en haut ou en bas
+function isAtScrollExtremity() {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    const atTop = scrollY === 0;
+    const atBottom = Math.abs(scrollY + windowHeight - documentHeight) < 2;
+
+    return {
+        atTop,
+        atBottom,
+        isAtExtremity: atTop || atBottom
+    };
+}
+
+// 2. Gère la détection de fin de scroll
+function setupScrollEndListener(callback, delay = 200) {
+    let isScrolling;
+
+    function triggerCallback() {
+        const position = isAtScrollExtremity();
+        if (position.isAtExtremity) {
+            callback(position);
+        }
+    }
+
+    // Si la page ne défile pas, déclenche quand même
+    if (document.body.scrollHeight <= window.innerHeight) {
+        setTimeout(() => {
+            callback({ atTop: true, atBottom: true, isAtExtremity: true });
+        }, 50);
+    }
+
+    window.addEventListener("scroll", () => {
+        clearTimeout(isScrolling);
+        isScrolling = setTimeout(triggerCallback, delay);
+    });
+}
+
+// 3. Transitions
+document.addEventListener("DOMContentLoaded", () => {
+    const acceuil = document.getElementById("acceuil");
+    const section2 = document.getElementById("section2");
+
+    let currentSection = 1;
+    let scrollTriggered = false;
+    let readyToTransition = false;
+
+    section2.style.display = "none";
+    acceuil.style.opacity = "1";
+    section2.style.opacity = "0";
+
+    acceuil.style.transition = "opacity 0.6s ease";
+    section2.style.transition = "opacity 0.6s ease";
+
+    setupScrollEndListener(() => {
+        readyToTransition = true;
+    });
+
+    window.addEventListener("wheel", (e) => {
+        if (scrollTriggered || !readyToTransition) return;
+
+        const direction = e.deltaY > 0 ? "down" : "up";
+
+        if (currentSection === 1 && direction === "down") {
+            scrollTriggered = true;
+            readyToTransition = false;
+
+            acceuil.style.opacity = "0";
+
+            setTimeout(() => {
+                acceuil.style.display = "none";
+                section2.style.display = "block";
+                window.scrollTo(0, 0);
+                void section2.offsetWidth;
+                section2.style.opacity = "1";
+
+                currentSection = 2;
+
+                // Redémarre le listener
+                setupScrollEndListener(() => {
+                    readyToTransition = true;
+                });
+
+                setTimeout(() => scrollTriggered = false, 600);
+            }, 600);
+        }else if (currentSection === 2 && direction === "up") {
+            scrollTriggered = true;
+            readyToTransition = false;
+
+            section2.style.opacity = "0";
+
+            setTimeout(() => {
+                section2.style.display = "none";
+                acceuil.style.display = "block";
+                window.scrollTo(0, 0);
+                void acceuil.offsetWidth;
+                acceuil.style.opacity = "1";
+
+                currentSection = 1;
+
+                setupScrollEndListener(() => {
+                    readyToTransition = true;
+                });
+
+                setTimeout(() => scrollTriggered = false, 600);
+            }, 600);
+        }
+    });
+});

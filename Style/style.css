@@ -4,50 +4,42 @@ html, body {
     padding: 0;
     font-family: 'Segoe UI', Roboto, sans-serif;
     background-color: #034971;
+    overflow: hidden;
+}
+
+/* =========================
+   Canvas (étoiles et cubes)
+========================= */
+#stars, #cube {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
 }
 
 #stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
     background: #034971;
 }
 
 #cube {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none; /* Pour que le contenu passe au-dessus sans bloquer */
+    background: #011f11;
 }
 
+/* =========================
+   SECTION 1 – Accueil
+========================= */
 .acceuil {
     width: 100%;
-    height: 100vh; /* 100% de la hauteur de l'écran */
+    height: 100vh;
     position: relative;
     overflow: hidden;
     display: block;
-}
-
-.section2 {
-    width: 100%;
-    position: relative;
-    display: none;
-    background: #03712d;
-}
-
-.container, .content {
-    position: relative;
     z-index: 1;
-    padding: 2rem;
-    max-width: 1000px;
-    margin: auto;
-    color: white;
+    transition: opacity 0.6s ease;
 }
 
 .vbox {
@@ -105,7 +97,6 @@ html, body {
     box-shadow: 0 0 20px #00ff88;
 }
 
-/* Animation scintillement */
 @keyframes scintillement {
     0%, 100% {
         box-shadow: 0 0 10px #00ff88;
@@ -115,51 +106,96 @@ html, body {
     }
 }
 
-/* Titres */
+/* =========================
+   SECTION 2 – Infos / Services
+========================= */
+.section2 {
+    width: 100%;
+    position: relative;
+    display: none;
+    background: radial-gradient(ellipse at top, #025524 0%, #011f11 100%);
+    overflow-y: auto;
+    min-height: 100vh;
+    z-index: 1;
+    transition: opacity 0.6s ease;
+}
+
+.container, .content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: auto;
+    color: white;
+}
+
+.container section {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px #00ff8855;
+    transition: transform 0.3s ease;
+}
+
+.container section:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 30px #00ff88aa;
+}
+
+/* Titres stylisés */
 h2 {
-  color: #00ccff;
-  border-bottom: 2px solid #00ccff;
-  padding-bottom: 0.3rem;
-  margin-top: 2rem;
+    color: #00ffcc;
+    border-bottom: 2px solid #00ffcc;
+    padding-bottom: 0.3rem;
+    margin-top: 0;
+    font-size: 24px;
+    text-shadow: 0 0 4px #00ffaa;
+}
+
+/* Paragraphes & Listes */
+p, li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d9ffea;
+}
+
+ul li::marker {
+    color: #00ff88;
+}
+
+ol li {
+    color: #ccffe0;
+    margin-bottom: 0.8rem;
+}
+
+em {
+    color: #88ffc0;
+    font-style: italic;
 }
 
 /* Cartes de services */
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 10px;
-  flex: 1 1 200px;
-  border: 1px solid #00ccff33;
+    background: rgba(0, 255, 136, 0.05);
+    padding: 1.2rem;
+    border-radius: 12px;
+    flex: 1 1 220px;
+    border: 1px solid #00ff8844;
+    color: #e0ffe8;
+    box-shadow: 0 0 8px #00ff8833;
+    transition: all 0.3s ease;
 }
 
-/* Listes et paragraphes */
-ul {
-  padding-left: 1.2rem;
-  list-style: square;
+.card:hover {
+    background: rgba(0, 255, 136, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #00ff88aa;
 }
-
-ol {
-  padding-left: 1.2rem;
-  line-height: 1.6;
-}
-
-p {
-  line-height: 1.5;
-}
-
-/* Optionnel : couleur différente pour chaque section */
-.canvas-section:nth-child(1) {
-  background-color: #034971;
-}
-
-.canvas-section:nth-child(2) {
-  background-color: #021f33;
-}
-
