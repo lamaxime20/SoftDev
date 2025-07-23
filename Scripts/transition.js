@@ -4,9 +4,13 @@
     document.getElementById('section2')
   ];
 
-  // Initial state : acceuil visible, section2 semi-transparent
+  // Initial state
+  sections.forEach(section => {
+    section.classList.add('hidden');
+    section.classList.remove('visible');
+  });
   sections[0].classList.remove('hidden');
-  sections[1].classList.add('hidden');
+  sections[0].classList.add('visible');
 
   function onScroll() {
     const viewportHeight = window.innerHeight;
@@ -17,11 +21,11 @@
       const visibleRatio = visibleHeight / rect.height;
 
       if (visibleRatio > 0.5) {
-        // Section visible, opacité à 1
         section.classList.remove('hidden');
+        section.classList.add('visible');
       } else {
-        // Section peu visible, opacité à 0
         section.classList.add('hidden');
+        section.classList.remove('visible');
       }
     });
   }

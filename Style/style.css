@@ -206,97 +206,119 @@ em {
     box-shadow: 0 0 20px #00ff88aa;
 }
 
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s ease;
+}
+
 /* =========================
    MEDIA QUERIES – Responsive
 ========================= */
 
 /* 📱 Petits écrans (téléphones) */
 @media (max-width: 600px) {
-  .logo {
-    width: 180px;
-  }
+    .logo {
+        width: 180px;
+    }
 
-  .slogan {
-    font-size: 16px;
-    max-width: 95vw;
-  }
+    .slogan {
+        font-size: 16px;
+        max-width: 95vw;
+    }
 
-  .btn1 {
-    width: 140px;
-    height: 38px;
-    font-size: 14px;
-  }
+    .btn1 {
+        width: 140px;
+        height: 38px;
+        font-size: 14px;
+    }
 
-  .btn1:hover {
-    width: 150px;
-    height: 42px;
-  }
+    .btn1:hover {
+        width: 150px;
+        height: 42px;
+    }
 
-  .vbox {
-    gap: 16px;
-    padding: 10px;
-  }
+    .vbox {
+        gap: 16px;
+        padding: 10px;
+    }
 
-  .container section {
-    padding: 1rem 1rem;
-  }
+    .container section {
+        padding: 1rem 1rem;
+    }
 
-  h2 {
-    font-size: 20px;
-  }
+    h2 {
+        font-size: 20px;
+    }
 
-  p, li {
-    font-size: 14px;
-  }
+    p, li {
+        font-size: 14px;
+    }
 
-  .cards {
-    flex-direction: column;
-  }
+    .cards {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
 
-  .card {
-    flex: 1 1 100%;
-  }
+    .card {
+        flex: none;
+        padding: 0.8rem 1rem;
+        font-size: 14px;
+        line-height: 1.4;
+        box-shadow: 0 0 6px #00ff8833;
+    }
 }
 
 /* 💻 Tablettes et écrans intermédiaires */
 @media (max-width: 900px) {
-  .logo {
-    width: 240px;
-  }
+    .logo {
+        width: 240px;
+    }
 
-  .slogan {
-    font-size: 18px;
-  }
+    .slogan {
+        font-size: 18px;
+    }
 
-  .btn1 {
-    width: 160px;
-    height: 42px;
-    font-size: 15px;
-  }
+    .btn1 {
+        width: 160px;
+        height: 42px;
+        font-size: 15px;
+    }
 
-  .btn1:hover {
-    width: 170px;
-    height: 46px;
-  }
+    .btn1:hover {
+        width: 170px;
+        height: 46px;
+    }
 
-  .vbox {
-    gap: 18px;
-    padding: 15px;
-  }
+    .vbox {
+        gap: 18px;
+        padding: 15px;
+    }
 
-  .cards {
-    gap: 0.8rem;
-  }
+    .cards {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
 
-  .card {
-    flex: 1 1 180px;
-  }
+    .card {
+        flex: none;
+        padding: 0.8rem 1rem;
+        font-size: 14px;
+        line-height: 1.4;
+        box-shadow: 0 0 6px #00ff8833;
+    }
 
-  h2 {
-    font-size: 22px;
-  }
+    h2 {
+        font-size: 22px;
+    }
 
-  p, li {
-    font-size: 15px;
-  }
+    p, li {
+        font-size: 15px;
+    }
 }
