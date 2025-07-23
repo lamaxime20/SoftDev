@@ -38,7 +38,7 @@
   });
 
   // 4. Géométrie agrandie
-  const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5); // cubes plus gros
+  const geometry = new THREE.BoxGeometry(2, 2, 2); // cubes plus gros
 
   // 5. Matériau semi-transparent
   const material = new THREE.MeshStandardMaterial({
