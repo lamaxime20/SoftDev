@@ -1,58 +1,68 @@
+/* =========================
+   RÈGLES GÉNÉRALES
+========================= */
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, sans-serif;
     background-color: #034971;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* =========================
-   Canvas (étoiles et cubes)
+   CANVAS : étoiles & cube
 ========================= */
-#stars, #cube {
-    position: fixed;
+canvas {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    z-index: 0; /* derrière les sections */
 }
 
 #stars {
+    z-index: 0;
     background: #034971;
 }
 
 #cube {
-    background: #011f11;
+    z-index: 0;
+    background: transparent;
+    display: block;         /* Pour éviter l'espace baseline inline */
+    width: 100%;            /* S'adapte au conteneur parent */
+    height: 100%;           /* S'adapte au conteneur parent */
+    overflow: hidden;       /* Ne pas afficher de scroll */
 }
 
 /* =========================
    SECTION 1 – Accueil
 ========================= */
 .acceuil {
-    width: 100%;
-    height: 100vh;
     position: relative;
-    overflow: hidden;
-    display: block;
     z-index: 1;
-    transition: opacity 0.6s ease;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    background: transparent;
+    transition: opacity 0.7s ease-in-out;
 }
 
 .vbox {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     align-items: center;
-    background-color: transparent;
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    transform: translateX(-50%);
+    gap: 20px;
     text-align: center;
+    background: transparent;
     padding: 20px;
     border-radius: 12px;
 }
@@ -110,22 +120,23 @@ html, body {
    SECTION 2 – Infos / Services
 ========================= */
 .section2 {
-    width: 100%;
     position: relative;
-    display: none;
-    background: radial-gradient(ellipse at top, #025524 0%, #011f11 100%);
-    overflow-y: auto;
-    min-height: 100vh;
     z-index: 1;
-    transition: opacity 0.6s ease;
+    width: 100%;
+    min-height: 100vh;
+    display: block;
+    background: radial-gradient(ellipse at top, #025524 0%, #011f11 100%);
+    padding: 40px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: opacity 0.7s ease-in-out;
 }
 
-.container, .content {
-    position: relative;
-    z-index: 2;
-    padding: 2rem;
+.container {
     max-width: 1000px;
     margin: auto;
+    position: relative;
+    z-index: 2;
     color: white;
 }
 
@@ -144,7 +155,6 @@ html, body {
     box-shadow: 0 0 30px #00ff88aa;
 }
 
-/* Titres stylisés */
 h2 {
     color: #00ffcc;
     border-bottom: 2px solid #00ffcc;
@@ -154,7 +164,6 @@ h2 {
     text-shadow: 0 0 4px #00ffaa;
 }
 
-/* Paragraphes & Listes */
 p, li {
     font-size: 16px;
     line-height: 1.6;
@@ -175,7 +184,6 @@ em {
     font-style: italic;
 }
 
-/* Cartes de services */
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -198,4 +206,29 @@ em {
     background: rgba(0, 255, 136, 0.08);
     transform: translateY(-5px);
     box-shadow: 0 0 20px #00ff88aa;
+}
+
+/* Classe pour transition de fondu */
+.fade-enter {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; /* désactive les interactions quand invisible */
+  /* IMPORTANT : Ne PAS mettre display:none */
 }
