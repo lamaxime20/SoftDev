@@ -33,4 +33,12 @@
     window.addEventListener('scroll', onScroll);
     window.addEventListener('resize', onScroll);
     onScroll();
+
+    document.getElementById("devis").addEventListener("click", function() {
+        let element = document.getElementById("formulaire");
+        element.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    });
 })();
