@@ -1,7 +1,12 @@
-from flask import Flask, request, jsonify
-from db import connection  # importe la connexion déjà établie
+from flask import Flask, request, jsonify, render_template
+from db import connection
+import re
 
 app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")  # sert la page principale
 
 @app.route('/formulaire', methods=['POST'])
 def handle_form():
@@ -9,12 +14,9 @@ def handle_form():
     email = request.form.get('email', '').strip()
     message = request.form.get('message', '').strip()
 
-    # Vérification des champs vides
     if not nom or not email or not message:
         return "❌ Tous les champs sont obligatoires.", 400
 
-    # Vérification de l'adresse email
-    import re
     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
         return "❌ Adresse email invalide.", 400
 
@@ -27,4 +29,4 @@ def handle_form():
         return f"❌ Erreur : {e}", 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
